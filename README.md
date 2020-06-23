@@ -1,2 +1,2 @@
 # zorlak
-Discord bot
+ Mainly created with specific gaming purposes, like showing some useful Counter-Strike demos and smoke tutorials. Apart from that, it's going to have some extra stuff that might be interesting to develop. Then, the final idea is to have a bot that "can do it all",  such as playing music, save/send files and play basic games.

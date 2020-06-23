@@ -41,8 +41,8 @@ bot.on('message', message => {
             break;
         case "louis":
             /*if (message.member.roles.find(role => role.name === "Padre")) return message.channel.send("É só olhares para ti, burro!")
-            .then(msg => msg.delete(10000));*/
-            message.channel.send({files: ['./louis.png']});
+            .then(msg => msg.delete(10000));
+            message.channel.send({files: ['./louis.png']});*/
         break;
         case "play":
             function play(connection, message) {
