@@ -5,7 +5,7 @@ const ytdl = require("ytdl-core");
 
 var servers = {};
 
-const token = 'NzIzOTcwNjY3NzU3Njk5MDky.XvIUdQ.XOPWXfJlr6Ds7UJiRMbP3dvLiXw';
+const token = 'NzIzOTcwNjY3NzU3Njk5MDky.XvI0Fw.Wi_tweG2hnZWHj9cqWv3SkNCC2M';
 
 bot.on('guildMemberAdd', member => {
     const channel = member.guild.channels.find(channel => channel.name === "bot_commands");
@@ -13,13 +13,13 @@ bot.on('guildMemberAdd', member => {
     channel.send(`${member}, welcome to Brabus, caralho!`);
 })
 
-bot.on('message', message => {
+bot.on('message', async message => {
     if (message.content == "boas zor") {
         message.channel.send('Foda-se, que puta de atrasados mentais mano, SÃO DUAS AMÉLIAS QUE PUTA QUE PARIU!');
     }
 
-    const PREFIX = "$";
-    let args = message.content.substring(PREFIX.length).split(" ");
+    const PREFIX = '$'
+    const args = message.content.substring(PREFIX.length).split(" ");
     
     switch (args[0]) {
         case "clear" :
@@ -38,14 +38,18 @@ bot.on('message', message => {
         break;   
         case "god":
             message.channel.send({files: ['./viadinh0.jpg']});
-            break;
+        break;
+        case "verimek":
+            message.channel.send({files: ['./verimek.png']});
+        break;
         case "louis":
             /*if (message.member.roles.find(role => role.name === "Padre")) return message.channel.send("É só olhares para ti, burro!")
             .then(msg => msg.delete(10000));
             message.channel.send({files: ['./louis.png']});*/
+            message.channel.send("O meu maior sonho era meter essa foto. Apenas a publicarei assim que o god Disney o permitir.");
         break;
         case "play":
-            function play(connection, message) {
+            /*function play(connection, message) {
                 var server = servers[message.guild.id];
 
                 server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
@@ -76,14 +80,34 @@ bot.on('message', message => {
 
             if (!message.member.voice.connection) message.member.voice.channel.join().then(function(connection){
                 play(connection, message);
+            })*/
+            const voiceChannel = message.member.voice.channel;
+            if (!voiceChannel) return message.channel.send("Meu ganda burro! Precisas de estar num canal para me chamar.");
+            const permissions = voiceChannel.permissionsFor(message.client.user);
+            if (!permissions.has('CONNECT')) return message.channel.send("A probabilidade de eu ter acesso a esse canal equivale à probabilidade de perderes a virgindade.");
+            if (!permissions.has('SPEAK')) return message.channel.send("Foda-se! Não tenho permissões para falar nesse canal.");
+
+            try {
+                var connection = await voiceChannel.join()
+            } catch (error) {
+                console.log(`Ocorreu um erro a entrar no canal: ${error}`);
+                return message.channel.send("Erro ao entrar no canal... é mesmo de LCC o cabrão que fez isto.");
+            }
+            const dispatcher = connection.play(ytdl(args[1]))
+            .on('finish', () => {
+                voiceChannel.leave();
             })
+            .on('error', error => {
+                console.log(error);
+            })
+            dispatcher.setVolumeLogarithmic(5 / 5);
         break;
         case "skip":
             var server = servers[message.guild.id];
             if (server.dispatcher) server.dispatcher.end();
         break;
         case "stop":
-            var server = servers[message.guild.id];
+            /*var server = servers[message.guild.id];
             if (message.member.voice.connection) {
                 for (var i = server.queue.length - 1; i >= 0; i--) {
                     server.queue.splice(i, 1);
@@ -92,7 +116,7 @@ bot.on('message', message => {
                 message.channel.send("Ending the fucking queue...");
                 console.log('Parei!');
             }
-            if (message.guild.connection) message.guild.voice.connection.disconnect();
+            if (message.guild.connection) message.guild.voice.connection.disconnect();*/
         break;
         case 'smokes':
             if (!args[1]) {
@@ -110,6 +134,8 @@ bot.on('message', message => {
                     message.author.send({files: ['./overpass6.png']});
                     message.author.send({files: ['./overpass7.png']});
                     message.author.send({files: ['./overpass8.png']});
+                    message.author.send("WARNING: ESTA SMOKE É PARA SER FEITA SENTADO:");
+                    
                 }
             } else message.channel.send("Ou és uma merda a escrever ou o paneleiro do Gonçalo ainda não me enviou nada sobre esse mapa...");
         break;
