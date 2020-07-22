@@ -40,7 +40,7 @@ bot.on('message', async message => {
             message.channel.send({files: ['./viadinh0.jpg']});
         break;
         case "verimek":
-            message.channel.send({files: ['./verimek.png']});
+            message.channel.send({files: ['./verimek.PNG']});
         break;
         case "louis":
             /*if (message.member.roles.find(role => role.name === "Padre")) return message.channel.send("É só olhares para ti, burro!")
