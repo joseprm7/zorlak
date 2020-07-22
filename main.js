@@ -48,13 +48,13 @@ bot.on('message', async message => {
             message.channel.send({files: ['./louis.png']});*/
             message.channel.send("O meu maior sonho era meter essa foto. Apenas a publicarei assim que o god Disney o permitir.");
         break;
-        case "sex bomb":
+        case "sex-bomb":
             message.channel.send({files: ['./sex-bomb.jpg']});
         break;
         case "wtf":
             message.channel.send({files: ['./wtf.png']});
         break;
-        case "comunhao":
+        case "gongod":
             message.channel.send({files: ['./comunhao.PNG']});
         break;
         case "play":
