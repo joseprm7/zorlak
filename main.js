@@ -5,7 +5,7 @@ const ytdl = require("ytdl-core");
 
 var servers = {};
 
-const token = 'NzIzOTcwNjY3NzU3Njk5MDky.XvI0Fw.Wi_tweG2hnZWHj9cqWv3SkNCC2M';
+const token = 'NzIzOTcwNjY3NzU3Njk5MDky.XvTr7g.NBjZzzzcsB_zRX8-CAafRG7CSDg';
 
 bot.on('guildMemberAdd', member => {
     const channel = member.guild.channels.find(channel => channel.name === "bot_commands");
