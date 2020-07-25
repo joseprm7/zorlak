@@ -23,8 +23,9 @@ bot.on('message', async message => {
     
     switch (args[0]) {
         case "clear" :
-            if (!args[1]) return message.reply("ERROR: Please define your second argument.");
-            message.channel.bulkDelete(args[1]);
+            if (!args[1]) return message.reply("ERROR: Define quantas mensagens queres apagar.");
+            var num = parseInt(args[1]) + 1;
+            message.channel.bulkDelete(num);
         break;
         case "embed":
             const embed = new Discord.MessageEmbed()
