@@ -71,46 +71,31 @@ bot.on('message', async message => {
                         connection.disconnect();
                     }
                 })
+            }*/
+            if (message.member.voice.channel) {
+                message.member.voice.channel.join().then(connection => {                    
+                    if (!args[1]) {
+                        message.channel.send("Mano, anda para o servidor. Claramente não sabes o que estás a fazer...");
+                        return;
+                    }
+                    else {
+                        let dispatcher = connection.play(ytdl(args[1], {quality: "highestaudio"}));
+                        
+                        dispatcher.on("finish", () => {
+                            dispatcher.destroy();
+                            dispatcher.disconnect();
+                        });
+                        
+                        dispatcher.on("error", () => {
+                            console.log("Erro do dispatcher: " + error);
+                        });
+                    }
+                }).catch(error => {
+                    message.reply("Impossível conectar: " + error);
+                });
+            } else {
+                message.reply("precisas de estar num canal")
             }
-            if (!args[1]) {
-                message.channel.send("Preciso de um link, meu...");
-                return;
-            }
-            if (!message.member.voice.channel) {
-                message.channel.send("Precisas de estar num canal para me poder chamar.");
-                return;
-            }
-            if (!servers[message.guild.id]) servers[message.guild.id] = {
-                queue: []
-            }
-
-            var server = servers[message.guild.id];
-                
-            server.queue.push(args[1]);
-
-            if (!message.member.voice.connection) message.member.voice.channel.join().then(function(connection){
-                play(connection, message);
-            })*/
-            const voiceChannel = message.member.voice.channel;
-            if (!voiceChannel) return message.channel.send("Meu ganda burro! Precisas de estar num canal para me chamar.");
-            const permissions = voiceChannel.permissionsFor(message.client.user);
-            if (!permissions.has('CONNECT')) return message.channel.send("A probabilidade de eu ter acesso a esse canal equivale à probabilidade de perderes a virgindade.");
-            if (!permissions.has('SPEAK')) return message.channel.send("Foda-se! Não tenho permissões para falar nesse canal.");
-
-            try {
-                var connection = await voiceChannel.join()
-            } catch (error) {
-                console.log(`Ocorreu um erro a entrar no canal: ${error}`);
-                return message.channel.send("Erro ao entrar no canal... é mesmo de LCC o cabrão que fez isto.");
-            }
-            const dispatcher = connection.play(ytdl(args[1]))
-            .on('finish', () => {
-                voiceChannel.leave();
-            })
-            .on('error', error => {
-                console.log(error);
-            })
-            dispatcher.setVolumeLogarithmic(5 / 5);
         break;
         case "skip":
             var server = servers[message.guild.id];
