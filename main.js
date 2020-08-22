@@ -72,7 +72,7 @@ bot.on('message', async message => {
                     }
                 })
             }*/
-            if (message.member.voice.channel) {
+            /*if (message.member.voice.channel) {
                 message.member.voice.channel.join().then(connection => {                    
                     if (!args[1]) {
                         message.channel.send("Mano, anda para o servidor. Claramente não sabes o que estás a fazer...");
@@ -95,11 +95,11 @@ bot.on('message', async message => {
                 });
             } else {
                 message.reply("precisas de estar num canal")
-            }
+            }*/
         break;
         case "skip":
-            var server = servers[message.guild.id];
-            if (server.dispatcher) server.dispatcher.end();
+            /*var server = servers[message.guild.id];
+            if (server.dispatcher) server.dispatcher.end();*/
         break;
         case "stop":
             /*var server = servers[message.guild.id];
