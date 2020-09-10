@@ -113,6 +113,9 @@ bot.on('message', async message => {
             }
             if (message.guild.connection) message.guild.voice.connection.disconnect();*/
         break;
+        case 'teto':
+            message.channel.send("Então se te entra água pelo TETO o meu pai bai lá")
+        break;
         case 'smokes':
             if (!args[1]) {
                 message.channel.send("Mas de que mapa, caralho?");
