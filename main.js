@@ -116,6 +116,14 @@ bot.on('message', async message => {
         case 'teto':
             message.channel.send("Então se te entra água pelo TETO o meu pai bai lá")
         break;
+        case 'song':
+            if (!args[1]) message.channel.send("Mas música de quem, caralho?");
+            else if (args[1] == "ze") {
+                message.channel.send("*É com orgulho\nQue só tenho osso\nÉ com respeito que me vês\nAgora ando em informática\nMas já andei em LCC*");
+            } else if (args[1] == "hugo") {
+                message.channel.send("*Ó sr Hugo sr Hugo\nSais à noite é so fuuuumo\nA gente sabe que és gay\nMas tu dizes eu não assumo*");
+            }
+        break;
         case 'smokes':
             if (!args[1]) {
                 message.channel.send("Mas de que mapa, caralho?");
